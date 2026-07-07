@@ -1,0 +1,36 @@
+package contoller;
+
+import lombok.RequiredArgsConstructor;
+import model.Task;
+import model.User;
+import org.springframework.web.bind.annotation.*;
+import repository.TaskRepository;
+import repository.UserRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+
+@RestController
+@RequestMapping("/api/tasks")
+@RequiredArgsConstructor
+public class TaskController {
+
+    private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
+
+    //Get all tasks form user id
+    @GetMapping("user/{userId}")
+    public List<Task> getTasksByUserID(@PathVariable Long userId) {
+        return taskRepository.findByUserId(userId);
+    }
+
+    @PostMapping("/user/{userId}")
+    public Task createTask(@PathVariable long userId, @RequestBody Task task) {
+
+        User user = userRepository.findById(userId).orElseThrow();
+        task.setUser(user);
+
+        return taskRepository.save(task);
+    }
+}
