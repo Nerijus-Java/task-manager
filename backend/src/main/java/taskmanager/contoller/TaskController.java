@@ -1,14 +1,13 @@
-package contoller;
+package taskmanager.contoller;
 
 import lombok.RequiredArgsConstructor;
-import model.Task;
-import model.User;
+import taskmanager.model.Task;
+import taskmanager.model.User;
 import org.springframework.web.bind.annotation.*;
-import repository.TaskRepository;
-import repository.UserRepository;
+import taskmanager.repository.TaskRepository;
+import taskmanager.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController

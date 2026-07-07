@@ -1,4 +1,4 @@
-package model;
+package taskmanager.model;
 
 import jakarta.persistence.*;
 import lombok.*;

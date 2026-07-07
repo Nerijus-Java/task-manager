@@ -1,9 +1,9 @@
-package contoller;
+package taskmanager.contoller;
 
 import lombok.RequiredArgsConstructor;
-import model.User;
+import taskmanager.model.User;
 import org.springframework.web.bind.annotation.*;
-import repository.UserRepository;
+import taskmanager.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api/users")

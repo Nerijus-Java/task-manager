@@ -1,6 +1,6 @@
-package repository;
+package taskmanager.repository;
 
-import model.User;
+import taskmanager.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
