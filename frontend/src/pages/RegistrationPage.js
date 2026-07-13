@@ -1,10 +1,10 @@
-
+import Container from '@mui/material/Container';
 
 function RegistrationPage() {
   return (
-    <div>
+    <Container fixed>
       <h1>Registration Page</h1>
-    </div>
+    </Container>
   );
 }
 
