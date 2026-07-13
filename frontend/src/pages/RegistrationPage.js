@@ -7,3 +7,5 @@ function RegistrationPage() {
     </div>
   );
 }
+
+export default RegistrationPage;
