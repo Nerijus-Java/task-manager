@@ -1,17 +1,18 @@
-import { Box, Button, TextField, Typography, Container, Paper } from '@mui/material';
-
 import { useState } from 'react';
-
-import { Link } from 'react-router-dom';
+import { Box, Button, TextField, Typography, Container, Paper } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import { registerUser } from '../services/ApiService';
 
 function RegistrationPage() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-
-  const handleRegistration = (e) => {
+  const handleRegistration = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -19,8 +20,27 @@ function RegistrationPage() {
       return;
     }
 
-    console.log("Registration form submitted");
-  }
+    const newUser = {
+      username,
+      email,
+      dateOfBirth,
+      password
+    };
+
+    try {
+      const response = await registerUser(newUser)
+      alert(response.data);
+      navigate('/login');
+    } catch (error) {
+      if (error.response && error.response.data) {
+        alert(error.response.data)
+      } else {
+        alert("server is offline")
+      }
+    }
+  };
+
+
 
   return (
     <Container maxWidth="xs">
@@ -46,6 +66,20 @@ function RegistrationPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="Date of Birth"
+              type={dateOfBirth ? 'date' : 'text'}
+              onFocus={(e) => (e.target.type = 'date')}
+              onBlur={(e) => {
+                if (!dateOfBirth) e.target.type = 'text';
+              }}
+
+              value={dateOfBirth}
+              onChange={(e) => setDateOfBirth(e.target.value)}
             />
             <TextField
               margin="normal"
