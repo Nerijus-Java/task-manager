@@ -13,7 +13,7 @@ export const darkTheme = createTheme({
 export const lightTheme = createTheme({
     palette: {
         mode: 'light',
-        primary: { main: '#1a237e' }, // The deep blue for the light navbar
+        primary: { main: '#1a237e' }, 
         secondary: { main: '#00b4d8' },
         background: { default: '#f5f7fa', paper: '#ffffff' },
         text: { primary: '#0a1128', secondary: '#546e7a' }

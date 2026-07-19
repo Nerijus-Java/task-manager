@@ -2,7 +2,6 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:8080/api";
 
-
 //Tasks
 export const getTasks = (userId) => {
   return axios.get(`${API_BASE_URL}/tasks/user/${userId}`);

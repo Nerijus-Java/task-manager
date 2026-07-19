@@ -30,9 +30,6 @@ function NavBar({ toggleTheme, isDark }) {
 
         <Box sx={{ flexGrow: 1 }} />
        
-        <Button color="inherit" component={Link} to="/register" >
-          Register
-        </Button>
         <Button color="inherit" onClick={toggleTheme}>
           {isDark ? <LightModeIcon /> : <DarkModeIcon />}
         </Button>

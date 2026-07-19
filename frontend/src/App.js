@@ -6,8 +6,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import NavBar from './components/NavBar';
 
-import RegistrationPage from './pages/RegistrationPage';
-import HomePage from './pages/HomePage';
+import Registration from './pages/RegistrationPage';
+import Home from './pages/HomePage';
+import Login from './pages/LoginPage';
 
 import { darkTheme, lightTheme } from './theme';
 
@@ -27,8 +28,9 @@ function App() {
         <CssBaseline />
         <NavBar toggleTheme={toggleTheme} isDark={isDark} />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<RegistrationPage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
