@@ -2,21 +2,41 @@ import { useState } from 'react';
 import { Box, Button, TextField, Typography, Container, Paper } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/ApiService';
+import CustomAlert from '../components/CustomAlert';
 
 function RegistrationPage() {
   const navigate = useNavigate();
 
+  //FORM
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  //ALERT 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
+  const showNotification = (message, severity) => {
+    setSnackbarMessage(message);
+    setSnackbarSeverity(severity);
+    setOpenSnackbar(true);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
   const handleRegistration = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      showNotification("Passwords do not match!", "error");
       return;
     }
 
@@ -29,13 +49,13 @@ function RegistrationPage() {
 
     try {
       const response = await registerUser(newUser)
-      alert(response.data);
+      showNotification(response.data, "success");
       navigate('/login');
     } catch (error) {
       if (error.response && error.response.data) {
-        alert(error.response.data)
+        showNotification(error.response.data, "error");
       } else {
-        alert("server is offline")
+        showNotification("Server is offline or unreachable.", "error");
       }
     }
   };
@@ -119,6 +139,10 @@ function RegistrationPage() {
           </Box>
         </Paper>
       </Box>
+      <CustomAlert open={openSnackbar}
+        message={snackbarMessage}
+        severity={snackbarSeverity}
+        onClose={handleCloseSnackbar} />
     </Container>
   );
 }
