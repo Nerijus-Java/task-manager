@@ -29,7 +29,7 @@ function LoginPage() {
                             margin="normal"
                             required
                             fullWidth
-                            label="usernameOrEmail"
+                            label="Username or Email"
                             type="text"
                             value={usernameOrEmail}
                             onChange={(e) => setusernameOrEmail(e.target.value)}
@@ -47,7 +47,7 @@ function LoginPage() {
                         />
                         <Button
                             type="submit"
-                            variant="outlined" size="large"
+                            variant="contained" size="large"
                             fullWidth
                             sx={{ mt: 4, mb: 2, py: 1.5 }}
                         >

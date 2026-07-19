@@ -68,7 +68,7 @@ function RegistrationPage() {
             <Button
               type="submit"
               fullWidth
-              variant="outlined"
+              variant="contained"
               size="large"
               sx={{ mt: 4, mb: 2, py: 1.5 }}
             >

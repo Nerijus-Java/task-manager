@@ -10,7 +10,9 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 
 function NavBar({ toggleTheme, isDark }) {
   return (
-    <AppBar position="static" color="default" elevation={1}>
+    <AppBar position="static"
+      color="default"
+      elevation={1}>
       <Toolbar>
         <Link
           to="/"
@@ -29,7 +31,7 @@ function NavBar({ toggleTheme, isDark }) {
         </Link>
 
         <Box sx={{ flexGrow: 1 }} />
-       
+
         <Button color="inherit" onClick={toggleTheme}>
           {isDark ? <LightModeIcon /> : <DarkModeIcon />}
         </Button>
