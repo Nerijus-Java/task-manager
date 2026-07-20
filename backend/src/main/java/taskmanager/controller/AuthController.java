@@ -1,51 +1,62 @@
 package taskmanager.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import taskmanager.dto.AuthResponse;
 import taskmanager.dto.LoginRequest;
-import taskmanager.dto.RegisterRequest;
 import taskmanager.model.User;
 import taskmanager.repository.UserRepository;
+import taskmanager.security.JwtUtil;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:3000")
 public class AuthController {
 
-    private UserRepository userRepository;
+    private final AuthenticationConfiguration authenticationConfiguration;
+
+    private final UserRepository userRepository;
+
+    private final JwtUtil jwtUtil;
+
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody RegisterRequest request) {
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
 
-        if (userRepository.existsUserByUsername(request.getUsername())) {
-            return ResponseEntity.badRequest().body("Username is taken");
+        if (userRepository.existsUserByUsername(user.getUsername())) {
+            return ResponseEntity.badRequest().body("Username is already taken!");
         }
 
-        if (userRepository.existsUserByEmail(request.getEmail())) {
-            return ResponseEntity.badRequest().body("Email is already in use");
+        if (userRepository.existsUserByEmail(user.getEmail())) {
+            return ResponseEntity.badRequest().body("Email is already taken!");
         }
 
-        User newUser = new User();
-
-        newUser.setUsername(request.getUsername());
-        newUser.setEmail(request.getEmail());
-        newUser.setDateOfBirth(request.getDateOfBirth());
-
-        //!!No encryption
-        newUser.setPassword(request.getPassword());
-
-        userRepository.save(newUser);
-
-        return ResponseEntity.ok("User Registered");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return ResponseEntity.ok("User registered successfully!");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest request) throws Exception {
 
-        return ResponseEntity.ok("Login ok");
+        AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getUsernameOrEmail(),
+                        request.getPassword()
+                )
+        );
+
+        String token = jwtUtil.generateToken(authentication.getName());
+        return ResponseEntity.ok(new AuthResponse(token));
+
     }
 
 }
