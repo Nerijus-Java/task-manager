@@ -1,7 +1,6 @@
 package taskmanager.repository;
 
 import taskmanager.model.Task;
-import taskmanager.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +10,4 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository <Task, Long> {
     List<Task> findByUserId(Long userID);
 
-    Long user(User user);
 }
