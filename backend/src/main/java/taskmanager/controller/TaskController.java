@@ -1,4 +1,4 @@
-package taskmanager.contoller;
+package taskmanager.controller;
 
 import lombok.RequiredArgsConstructor;
 import taskmanager.model.Task;
@@ -18,7 +18,6 @@ public class TaskController {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
 
-    //Get all tasks form user id
     @GetMapping("user/{userId}")
     public List<Task> getTasksByUserID(@PathVariable Long userId) {
         return taskRepository.findByUserId(userId);

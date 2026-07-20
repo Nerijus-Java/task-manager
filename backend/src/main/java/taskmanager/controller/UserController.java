@@ -1,4 +1,4 @@
-package taskmanager.contoller;
+package taskmanager.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

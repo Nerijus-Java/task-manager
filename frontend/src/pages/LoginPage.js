@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function LoginPage() {
 
-    const [usernameOrEmail, setusernameOrEmail] = useState('');
+    const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleLogin = (e) => {
@@ -32,7 +32,7 @@ function LoginPage() {
                             label="Username or Email"
                             type="text"
                             value={usernameOrEmail}
-                            onChange={(e) => setusernameOrEmail(e.target.value)}
+                            onChange={(e) => setUsernameOrEmail(e.target.value)}
                             autoFocus
                         />
 

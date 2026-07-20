@@ -14,7 +14,6 @@ function CustomAlert({ open, message, severity, onClose }) {
         variant="filled"
         sx={{ 
           width: '100%', 
-          // Custom dark blue for success, standard red for error
           bgcolor: severity === 'success' ? '#0b3d91' : '#d32f2f' 
         }}
       >
