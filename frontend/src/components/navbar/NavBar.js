@@ -1,12 +1,10 @@
-import { Link } from 'react-router-dom';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
-
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, IconButton, Tooltip } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
-import TaskmanagerLogo from '../../assets/TaskManagerLogo.png';
 import UserAvatar from './UserAvatar';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -17,38 +15,30 @@ function NavBar({ toggleTheme, isDark}) {
   return (
     <AppBar position="static"
       color="default"
-      elevation={1}>
+      elevation={0}
+      sx={{
+        borderBottom: 1,
+        borderColor: 'divider',
+        bgcolor: 'background.paper'
+      }}>
       <Toolbar>
-        <Link
-          to="/"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            textDecoration: 'none',
-            color: 'inherit',
-          }}
-        >
-
-          <img src={TaskmanagerLogo} alt="Task Manager Logo" style={{ height: '40px', marginRight: '16px' }} />
-          <Typography variant="h6">
-            Task Manager
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <Typography variant="h5" sx={{ fontWeight: 800, letterSpacing: '-0.5px', transition: 'opacity 0.2s ease', '&:hover': { opacity: 0.7 } }}>
+            <Box component="span" sx={{ color: 'primary.main' }}>Task</Box>
+            <Box component="span" sx={{ color: 'text.primary' }}>Manager</Box>
           </Typography>
         </Link>
 
         <Box sx={{ flexGrow: 1 }} />
 
-        <Button color="inherit" onClick={toggleTheme} sx={{ mr: 2 }}>
-          {isDark ? <LightModeIcon /> : <DarkModeIcon />}
-        </Button>
+        <Tooltip title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}>
+          <IconButton onClick={toggleTheme} color="inherit" sx={{ mr: 2 }}>
+            {isDark ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
+        </Tooltip>
 
-          {isAuthenticated ? (
-          <UserAvatar />
-        ) : (
-          <Button component={Link} to="/login" variant="contained" color="primary">
-            Sign In
-          </Button>
-        )}
-          
+        {isAuthenticated && <UserAvatar />}
+
       </Toolbar>
     </AppBar>
   );

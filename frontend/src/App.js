@@ -10,28 +10,32 @@ import Registration from './pages/RegistrationPage';
 import Home from './pages/HomePage';
 import Login from './pages/LoginPage';
 
+import GradientBackground from './components/GradientBackground';
 import { darkTheme, lightTheme } from './theme';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
-  const [isDark, setIsDark] = useState(true);
 
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-  };
+  const [isDark, setIsDark] = useState(false);
 
+  const toggleTheme = () => setIsDark(!isDark);
 
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <AuthProvider>
         <BrowserRouter>
           <CssBaseline />
-          <NavBar toggleTheme={toggleTheme} isDark={isDark} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Registration />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
+          <GradientBackground isDark={isDark}>
+            <NavBar 
+              toggleTheme={toggleTheme}
+              isDark={isDark}
+            />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Registration />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </GradientBackground>
         </BrowserRouter>
       </AuthProvider>
     </ThemeProvider>
