@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Box, Button, TextField, Typography, Container, Paper } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/ApiService';
 import CustomAlert from '../components/CustomAlert';
+import { AuthContext } from '../context/AuthContext';
 
 function LoginPage() {
 
     const navigate = useNavigate();
+
+    const { login } = useContext(AuthContext);
 
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -40,12 +43,12 @@ function LoginPage() {
             const response = await loginUser(credentials);
             const jwtToken = response.data.token;
 
-            localStorage.setItem("token", jwtToken);
+            login(jwtToken);
 
             showNotification("Login successful!", "success");
 
             setTimeout(() => {
-                navigate('/');
+                navigate("/");
             }, 1000);
 
         } catch (error) {
@@ -54,10 +57,6 @@ function LoginPage() {
         }
 
     };
-
-
-
-
 
     return (
 
@@ -109,6 +108,12 @@ function LoginPage() {
                     </Box>
                 </Paper>
             </Box>
+            <CustomAlert
+                open={openSnackbar}
+                message={snackbarMessage}
+                severity={snackbarSeverity}
+                onClose={handleCloseSnackbar}
+            />
         </Container>
     );
 }

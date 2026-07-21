@@ -11,6 +11,7 @@ import Home from './pages/HomePage';
 import Login from './pages/LoginPage';
 
 import { darkTheme, lightTheme } from './theme';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -22,15 +23,17 @@ function App() {
 
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-      <BrowserRouter>
-        <CssBaseline />
-        <NavBar toggleTheme={toggleTheme} isDark={isDark} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <CssBaseline />
+          <NavBar toggleTheme={toggleTheme} isDark={isDark} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Registration />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
