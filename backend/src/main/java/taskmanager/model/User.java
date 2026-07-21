@@ -30,4 +30,6 @@ public class User {
     @Column(nullable = false)
     private Role role = Role.ROLE_USER;
 
+    private String companyCode;
+
 }
