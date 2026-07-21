@@ -1,17 +1,63 @@
 import { useState } from 'react';
 import { Box, Button, TextField, Typography, Container, Paper } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from '../services/ApiService';
+import CustomAlert from '../components/CustomAlert';
 
 function LoginPage() {
+
+    const navigate = useNavigate();
 
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = (e) => {
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
+    const showNotification = (message, severity) => {
+        setSnackbarMessage(message);
+        setSnackbarSeverity(severity);
+        setOpenSnackbar(true);
+    };
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSnackbar(false);
+    };
+
+    const handleLogin = async (e) => {
         e.preventDefault();
 
-        console.log("Sending to backend:", { usernameOrEmail, password });
+        const credentials = {
+            usernameOrEmail,
+            password
+        };
+
+        try {
+            const response = await loginUser(credentials);
+            const jwtToken = response.data.token;
+
+            localStorage.setItem("token", jwtToken);
+
+            showNotification("Login successful!", "success");
+
+            setTimeout(() => {
+                navigate('/');
+            }, 1000);
+
+        } catch (error) {
+            showNotification("Invalid username or password.", "error");
+            console.error("Login Error:", error);
+        }
+
     };
+
+
+
+
 
     return (
 

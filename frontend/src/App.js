@@ -12,8 +12,6 @@ import Login from './pages/LoginPage';
 
 import { darkTheme, lightTheme } from './theme';
 
-
-
 function App() {
   const [isDark, setIsDark] = useState(true);
 
