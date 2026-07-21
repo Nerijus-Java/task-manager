@@ -17,6 +17,7 @@ public class Task {
     private String title;
     private String description;
 
+    @Enumerated(EnumType.STRING)
     private TaskStatus status = TaskStatus.TODO;
 
     @ManyToOne
