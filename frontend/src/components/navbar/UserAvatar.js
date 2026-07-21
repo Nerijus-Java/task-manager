@@ -1,7 +1,7 @@
 import { Avatar, IconButton, Menu, MenuItem } from '@mui/material';
 import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 
 function UserAvatar() {
     const [anchorEl, setAnchorEl] = useState(null);

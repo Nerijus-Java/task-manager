@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import NavBar from './components/NavBar';
+import NavBar from './components/navbar/NavBar';
 
 import Registration from './pages/RegistrationPage';
 import Home from './pages/HomePage';

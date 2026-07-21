@@ -6,9 +6,9 @@ import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
-import TaskmanagerLogo from '../assets/TaskManagerLogo.png';
+import TaskmanagerLogo from '../../assets/TaskManagerLogo.png';
 import UserAvatar from './UserAvatar';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 
 function NavBar({ toggleTheme, isDark}) {
 
