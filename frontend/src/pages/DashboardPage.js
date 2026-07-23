@@ -1,7 +1,6 @@
 import { Container, Divider, Box, Typography } from '@mui/material';
 import DomainAddOutlinedIcon from '@mui/icons-material/DomainAddOutlined';
 import PageHeader from '../components/PageHeader';
-import FloatingButton from '../components/FloatingButton';
 
 function Dashboard() {
 
@@ -11,9 +10,8 @@ function Dashboard() {
                 title="Dashboard"
                 buttonText="Join Company"
                 icon={<DomainAddOutlinedIcon />}
-                color="primary"
-            />
-
+                color="primary" />
+                
             <Divider sx={{ mb: 4 }} />
 
             <Box
@@ -31,9 +29,6 @@ function Dashboard() {
                     Your workspace is ready. Click the + button to create a task!
                 </Typography>
             </Box>
-            <FloatingButton
-                tooltipText="Create New Task"
-            />
         </Container>
     );
 
