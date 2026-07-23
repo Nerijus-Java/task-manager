@@ -6,8 +6,11 @@ import { AuthContext } from '../../context/AuthContext';
 function UserAvatar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate();
+   
+    const { logout , currentUser } = useContext(AuthContext);
 
-    const { logout } = useContext(AuthContext);
+    const firstLetter = currentUser?.username
+    ? currentUser.username.charAt(0).toUpperCase(): '?';
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -27,7 +30,7 @@ function UserAvatar() {
     return (
         <div>
             <IconButton onClick={handleMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ bgcolor: 'primary.main' }}>U</Avatar>
+                <Avatar sx={{ bgcolor: 'primary.main' }}>{firstLetter}</Avatar>
             </IconButton>
             <Menu
                 anchorEl={anchorEl}

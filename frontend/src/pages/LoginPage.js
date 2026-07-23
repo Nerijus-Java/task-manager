@@ -41,9 +41,11 @@ function LoginPage() {
 
         try {
             const response = await loginUser(credentials);
+            
             const jwtToken = response.data.token;
+            const userObject = response.data.user;
 
-            login(jwtToken);
+            login(jwtToken, userObject);
 
             showNotification("Login successful!", "success");
 

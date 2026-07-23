@@ -6,8 +6,12 @@ import org.springframework.web.bind.annotation.*;
 
 import taskmanager.dto.AuthResponse;
 import taskmanager.dto.LoginRequest;
+import taskmanager.exception.ResourceNotFoundException;
 import taskmanager.model.User;
+import taskmanager.repository.UserRepository;
 import taskmanager.service.AuthService;
+
+import java.nio.file.ReadOnlyFileSystemException;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,6 +19,7 @@ import taskmanager.service.AuthService;
 public class AuthController {
 
     private final AuthService authService;
+    private final UserRepository userRepository;
 
 
     @PostMapping("/register")
@@ -29,8 +34,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest request) throws Exception {
+
         String token = authService.loginUser(request.getUsernameOrEmail(),request.getPassword());
-        return ResponseEntity.ok(new AuthResponse(token));
+        User user = userRepository.findByUsernameOrEmail(request.getUsernameOrEmail(),request.getUsernameOrEmail())
+                .orElseThrow(() -> new ResourceNotFoundException(request.getUsernameOrEmail()));
+
+        return ResponseEntity.ok(new AuthResponse(token, user));
 
     }
 
