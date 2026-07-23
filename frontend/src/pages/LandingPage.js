@@ -5,6 +5,7 @@ import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
 import FeatureCard from '../components/landingpage/FeatureCard'
 
 import { Link } from 'react-router-dom';
+import { BarChart } from '@mui/icons-material';
 
 function LandingPage() {
     return (
@@ -57,22 +58,28 @@ function LandingPage() {
             </Box>
 
             <Grid container spacing={2} sx={{ mt: 8, mb: 4 }} >
-                <Grid size={4}>
+                <Grid size={3}>
                     <FeatureCard icon={<DarkModeOutlinedIcon sx={{ fontSize: 40, color: 'primary.main', mb: 1 }} />}
                         title="Dark Mode"
                         description="Enjoy a sleek and modern interface with our dark mode feature, perfect for working in low-light environments." />
                 </Grid>
 
-                <Grid size={4}>
+                <Grid size={3}>
                     <FeatureCard icon={<CheckCircleOutlinedIcon sx={{ fontSize: 40, color: 'primary.main', mb: 1 }} />}
                         title="Task Management"
                         description="Easily create, organize, and track your tasks to stay on top of your work." />
                 </Grid>
 
-                <Grid size={4}>
+                <Grid size={3}>
                     <FeatureCard icon={<SecurityOutlinedIcon sx={{ fontSize: 40, color: 'primary.main', mb: 1 }} />}
                         title="Security"
                         description="Your data is safe with us. We prioritize your privacy and security." />
+                </Grid>
+
+                <Grid size={3}>
+                    <FeatureCard icon={<BarChart sx={{ fontSize: 40, color: 'primary.main', mb: 1 }} />}
+                        title="Analytics"
+                        description="Visualize your productivity with comprehensive charts and metric tracking to optimize your daily workflow." />
                 </Grid>
             </Grid>
 
