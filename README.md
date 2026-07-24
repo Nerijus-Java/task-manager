@@ -16,6 +16,8 @@ A modern web application designed to help users organize their day and manage ta
 * Spring Boot
 * RESTful API Architecture
 
+## Pages
+
 **Light Pages:**
 <img width="1870" height="955" alt="HomePageLight" src="https://github.com/user-attachments/assets/c5c72b09-e27b-4d56-9b2a-fdba0e88c5b2" />
 <img width="1868" height="955" alt="LoginPageLight" src="https://github.com/user-attachments/assets/09be15a3-85f9-4725-aaf7-3bf405191ef2" />
