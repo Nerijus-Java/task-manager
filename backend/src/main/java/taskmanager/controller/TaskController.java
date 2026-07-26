@@ -22,6 +22,11 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTaskByUserID(userId));
     }
 
+    @PostMapping("/user/{userId}")
+    public ResponseEntity<Task> createPersonalTask(@PathVariable Long userId, @RequestBody Task task) {
+        return ResponseEntity.ok(taskService.assignTask(userId, task));
+    }
+
     @PostMapping("/assign/{workerId}")
     public ResponseEntity<Task> createTask(@PathVariable long workerId, @RequestBody Task task) {
         return ResponseEntity.ok(taskService.assignTask(workerId,task));
