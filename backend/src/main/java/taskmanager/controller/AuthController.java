@@ -1,5 +1,6 @@
 package taskmanager.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,6 @@ import taskmanager.model.User;
 import taskmanager.repository.UserRepository;
 import taskmanager.service.AuthService;
 
-import java.nio.file.ReadOnlyFileSystemException;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,7 +23,7 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody User user) {
         try {
             authService.registerUser(user);
             return ResponseEntity.ok("User registered");
@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest request) throws Exception {
+    public ResponseEntity<?> loginUser(@Valid @RequestBody LoginRequest request) throws Exception {
 
         String token = authService.loginUser(request.getUsernameOrEmail(),request.getPassword());
         User user = userRepository.findByUsernameOrEmail(request.getUsernameOrEmail(),request.getUsernameOrEmail())
