@@ -27,7 +27,7 @@ function LandingPage() {
                     </Box>
                 </Typography>
 
-                <Typography variant="h6" color="text.secondary" paragraph sx={{ mb: 5, maxWidth: '600px' }}>
+                <Typography variant="h6" color="text.secondary" sx={{ mb: 5, maxWidth: '600px' }}>
                     The simplest way to manage your tasks, boost your productivity, and get things done.
                     Join today to take control of your workflow.
                 </Typography>
