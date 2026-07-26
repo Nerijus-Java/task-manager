@@ -2,7 +2,7 @@ import { Grid, Card, CardContent, Typography } from '@mui/material';
 
 function TaskMetrics({ todoCount, inProgressCount, completedCount }) {
     return (
-        
+
         <Grid container spacing={3} sx={{ mb: 4 }}>
             <Grid size={4}>
                 <Card elevation={2} sx={{ textAlign: 'center', py: 2 }}>
@@ -16,7 +16,7 @@ function TaskMetrics({ todoCount, inProgressCount, completedCount }) {
                     </CardContent>
                 </Card>
             </Grid>
-            
+
             <Grid size={4}>
                 <Card elevation={2} sx={{ textAlign: 'center', py: 2 }}>
                     <CardContent>
@@ -29,7 +29,7 @@ function TaskMetrics({ todoCount, inProgressCount, completedCount }) {
                     </CardContent>
                 </Card>
             </Grid>
-            
+
             <Grid size={4}>
                 <Card elevation={2} sx={{ textAlign: 'center', py: 2 }}>
                     <CardContent>

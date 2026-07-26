@@ -19,7 +19,7 @@ export const lightTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         elevation1: {
-          boxShadow: '0px 10px 25px rgba(0, 0, 0, 0.05)', 
+          boxShadow: '0px 10px 25px rgba(0, 0, 0, 0.05)',
           border: '1px solid rgba(0,0,0,0.03)'
         },
         elevation2: {
@@ -40,7 +40,7 @@ export const darkTheme = createTheme({
     },
     background: {
       default: '#121214',
-      paper: '#18181b',   
+      paper: '#18181b',
     },
     text: {
       primary: '#f4f4f5',

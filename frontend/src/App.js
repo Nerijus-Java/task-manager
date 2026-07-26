@@ -26,7 +26,7 @@ function App() {
         <BrowserRouter>
           <CssBaseline />
           <GradientBackground isDark={isDark}>
-            <NavBar 
+            <NavBar
               toggleTheme={toggleTheme}
               isDark={isDark}
             />

@@ -1,6 +1,6 @@
 import { Box, Typography, Button } from '@mui/material';
 
-function PageHeader({ title, buttonText, icon, onButtonClick,buttonColor }) {
+function PageHeader({ title, buttonText, icon, onButtonClick, buttonColor }) {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
             <Box>
@@ -14,13 +14,13 @@ function PageHeader({ title, buttonText, icon, onButtonClick,buttonColor }) {
                     color={buttonColor}
                     startIcon={icon}
                     onClick={onButtonClick}
-                    sx={{ 
-                        borderRadius: 2, 
-                        px: 3, 
-                        py: 1, 
+                    sx={{
+                        borderRadius: 2,
+                        px: 3,
+                        py: 1,
                         fontWeight: 'bold',
                         borderWidth: 2,
-                        '&:hover': { borderWidth: 2 } 
+                        '&:hover': { borderWidth: 2 }
                     }}
                 >
                     {buttonText}

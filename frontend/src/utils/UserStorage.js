@@ -1,12 +1,12 @@
 export const UserStorage = {
-    
+
     saveUser: (user) => {
         localStorage.setItem("currentUser", JSON.stringify(user));
     },
-    
+
     getUser: () => {
         const storedUser = localStorage.getItem("currentUser");
-        
+
         if (!storedUser) return null;
 
         try {
@@ -17,7 +17,7 @@ export const UserStorage = {
             return null;
         }
     },
-    
+
     clearUser: () => {
         localStorage.removeItem("currentUser");
     }

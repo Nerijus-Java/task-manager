@@ -41,7 +41,7 @@ function LoginPage() {
 
         try {
             const response = await loginUser(credentials);
-            
+
             const jwtToken = response.data.token;
             const userObject = response.data.user;
 
