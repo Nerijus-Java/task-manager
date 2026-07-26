@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import taskmanager.dto.AuthResponse;
+import taskmanager.exception.ResourceNotFoundException;
 import taskmanager.model.User;
 import taskmanager.repository.UserRepository;
 import taskmanager.security.JwtUtil;
@@ -31,11 +33,16 @@ public class AuthService {
         return userRepository.save(user);
     }
 
-    public String loginUser(String usernameOrEmail, String password) throws Exception {
+    public AuthResponse loginUser(String usernameOrEmail, String password) throws Exception {
         Authentication authentication = authenticationConfiguration.getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(usernameOrEmail, password)
         );
 
-        return jwtUtil.generateToken(authentication.getName());
+        String token = jwtUtil.generateToken(authentication.getName());
+
+        User user = userRepository.findByUsernameOrEmail(usernameOrEmail,usernameOrEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        return new AuthResponse(token, user);
     }
 }
