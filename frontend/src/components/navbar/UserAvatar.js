@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 function UserAvatar() {
+
+    const { logout, currentUser } = useContext(AuthContext);
+
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate();
-   
-    const { logout , currentUser } = useContext(AuthContext);
 
     const firstLetter = currentUser?.username
-    ? currentUser.username.charAt(0).toUpperCase(): '?';
+        ? currentUser.username.charAt(0).toUpperCase() : '?';
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -21,7 +22,7 @@ function UserAvatar() {
     };
 
     const handleLogout = () => {
-        
+
         logout();
         setAnchorEl(null);
         navigate('/login');
