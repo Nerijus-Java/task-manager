@@ -56,5 +56,4 @@ export const useTasks = (userId) => {
         handleDelete
     };
 };
-
 export default useTasks;

@@ -1,63 +1,18 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Box, Button, TextField, Typography, Container, Paper } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from '../services/ApiService';
+import { Link } from 'react-router-dom';
 import CustomAlert from '../components/CustomAlert';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 
 function LoginPage() {
-
-    const navigate = useNavigate();
-
-    const { login } = useContext(AuthContext);
-
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [openSnackbar, setOpenSnackbar] = useState(false);
-    const [snackbarMessage, setSnackbarMessage] = useState('');
-    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
-
-    const showNotification = (message, severity) => {
-        setSnackbarMessage(message);
-        setSnackbarSeverity(severity);
-        setOpenSnackbar(true);
-    };
-
-    const handleCloseSnackbar = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpenSnackbar(false);
-    };
+    const {executeLogin, alertProps} = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
-        const credentials = {
-            usernameOrEmail,
-            password
-        };
-
-        try {
-            const response = await loginUser(credentials);
-
-            const jwtToken = response.data.token;
-            const userObject = response.data.user;
-
-            login(jwtToken, userObject);
-
-            showNotification("Login successful!", "success");
-
-            setTimeout(() => {
-                navigate("/");
-            }, 1000);
-
-        } catch (error) {
-            showNotification("Invalid username or password.", "error");
-            console.error("Login Error:", error);
-        }
-
+        executeLogin({ usernameOrEmail, password });
     };
 
     return (
@@ -110,12 +65,7 @@ function LoginPage() {
                     </Box>
                 </Paper>
             </Box>
-            <CustomAlert
-                open={openSnackbar}
-                message={snackbarMessage}
-                severity={snackbarSeverity}
-                onClose={handleCloseSnackbar}
-            />
+            <CustomAlert {...alertProps}/>
         </Container>
     );
 }

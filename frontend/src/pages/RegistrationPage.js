@@ -1,66 +1,25 @@
 import { useState } from 'react';
 import { Box, Button, TextField, Typography, Container, Paper } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import { registerUser } from '../services/ApiService';
+import { Link } from 'react-router-dom';
 import CustomAlert from '../components/CustomAlert';
+import { useAlert } from '../hooks/useAlert';
+import { useAuth } from '../hooks/useAuth';
 
 function RegistrationPage() {
-  const navigate = useNavigate();
-
-
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
-
-  const showNotification = (message, severity) => {
-    setSnackbarMessage(message);
-    setSnackbarSeverity(severity);
-    setOpenSnackbar(true);
-  };
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
+  const { alertProps, triggerAlert } = useAlert();
+  const { executeRegistration } = useAuth(triggerAlert);
 
   const handleRegistration = async (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      showNotification("Passwords do not match!", "error");
-      return;
-    }
-
-    const newUser = {
-      username,
-      email,
-      dateOfBirth,
-      password
-    };
-
-    try {
-      const response = await registerUser(newUser)
-      showNotification(response.data, "success");
-      navigate('/login');
-    } catch (error) {
-      if (error.response && error.response.data) {
-        showNotification(error.response.data, "error");
-      } else {
-        showNotification("Server is offline or unreachable.", "error");
-      }
-    }
+    const newUser = { username, email, dateOfBirth, password };
+    executeRegistration(newUser, confirmPassword);
   };
-
-
 
   return (
     <Container maxWidth="xs">
@@ -139,10 +98,7 @@ function RegistrationPage() {
           </Box>
         </Paper>
       </Box>
-      <CustomAlert open={openSnackbar}
-        message={snackbarMessage}
-        severity={snackbarSeverity}
-        onClose={handleCloseSnackbar} />
+      <CustomAlert {...alertProps}/>
     </Container>
   );
 }
