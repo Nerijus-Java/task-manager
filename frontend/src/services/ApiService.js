@@ -29,3 +29,15 @@ export const createTask = (taskData, userId) => {
     headers: getAuthHeader()
   });
 };
+
+export const deleteTask = (taskID) => {
+  return axios.delete(`${API_BASE_URL}/tasks/${taskID}`, {
+    headers: getAuthHeader()
+  });
+}
+
+export const updateTaskStatus = (taskID, newStatus) => {
+  return axios.patch(`${API_BASE_URL}/tasks/${taskID}/status`, newStatus, {
+    headers: getAuthHeader()
+  });
+}
