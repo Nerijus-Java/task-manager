@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-  width: 8px; 
+  width: 8px;
   height: 8px;
 }
 
@@ -8,12 +8,16 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #555;
+  background: rgba(136, 136, 136, 0.05); 
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #888;
+  background: rgba(136, 136, 136, 0.8); 
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(136, 136, 136, 1); 
 }
 
 ::-webkit-scrollbar-corner {
@@ -22,5 +26,5 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #555 transparent;
+  scrollbar-color: rgba(136, 136, 136, 0.2) transparent; 
 }

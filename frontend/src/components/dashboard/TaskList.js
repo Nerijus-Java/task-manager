@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Card, CardActionArea, Grid, ToggleButtonGroup, ToggleButton,Button } from "@mui/material";
+import { Box, Typography, Card, CardActionArea, Grid, ToggleButtonGroup, ToggleButton, Button, Tabs, Tab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import TaskCard from "./TaskCard";
 import CompactTaskCard from "./CompactTaskForm";
@@ -9,11 +9,17 @@ import ViewListIcon from '@mui/icons-material/ViewList';
 export default function TaskList({ tasks, onToggleStatus, onDelete, onAddNew }) {
   const [view, setView] = useState('grid');
 
+  const [activeTab, setActiveTab] = useState('ALL');
+
+  const filteredTasks = tasks?.filter(task => {
+    if (activeTab === 'ALL') return true;
+    return task.status === activeTab;
+  });
+
   return (
 
-    <Box sx={{ mt: 2 }}>
-
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+   <Box sx={{ mt: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
         <Typography variant="h5" fontWeight="bold" sx={{ color: 'text.primary' }}>
           Your Workspace
         </Typography>
@@ -28,9 +34,23 @@ export default function TaskList({ tasks, onToggleStatus, onDelete, onAddNew }) 
           <ToggleButton value="list"><ViewListIcon fontSize="small" /></ToggleButton>
         </ToggleButtonGroup>
       </Box>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 4 }}>
+        <Tabs 
+            value={activeTab} 
+            onChange={(e, newValue) => setActiveTab(newValue)}
+            textColor="primary"
+            indicatorColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+        >
+            <Tab label="All Tasks" value="ALL" sx={{ fontWeight: 'bold', textTransform: 'none' }} />
+            <Tab label="To Do" value="TODO" sx={{ fontWeight: 'bold', textTransform: 'none' }} />
+            <Tab label="In Progress" value="IN_PROGRESS" sx={{ fontWeight: 'bold', textTransform: 'none' }} />
+            <Tab label="Completed" value="COMPLETED" sx={{ fontWeight: 'bold', textTransform: 'none' }} />
+        </Tabs>
+      </Box>
 
       <Box>
-
         {view === 'grid' ? (
           <Grid container spacing={3}>
             <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
@@ -41,7 +61,7 @@ export default function TaskList({ tasks, onToggleStatus, onDelete, onAddNew }) 
                 </CardActionArea>
               </Card>
             </Grid>
-            {tasks?.map((task) => (
+            {filteredTasks?.map((task) => (
               <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={task.id}>
                 <TaskCard task={task} onToggleStatus={onToggleStatus} onDelete={onDelete} />
               </Grid>
@@ -52,13 +72,13 @@ export default function TaskList({ tasks, onToggleStatus, onDelete, onAddNew }) 
             <Button startIcon={<AddIcon />} variant="outlined" fullWidth sx={{ mb: 3, py: 1.5, borderStyle: 'dashed', borderWidth: 2, borderRadius: 2, color: 'text.secondary', borderColor: 'divider', '&:hover': { borderWidth: 2 } }} onClick={onAddNew}>
               Create New Task
             </Button>
-            {tasks?.map((task) => (
+            {filteredTasks?.map((task) => (
               <CompactTaskCard key={task.id} task={task} onToggleStatus={onToggleStatus} onDelete={onDelete} />
             ))}
           </Box>
         )}
-
       </Box>
+
     </Box>
   );
 }
