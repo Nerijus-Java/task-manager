@@ -1,4 +1,4 @@
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Divider, } from '@mui/material';
+import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Divider } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import BusinessIcon from '@mui/icons-material/Business';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -14,7 +14,7 @@ function Sidebar() {
 
     const menuItems = [
         { text: 'Dashboard', icon: <DashboardIcon />, path: '/' },
-        { text: 'business', icon: <BusinessIcon />, path: '/business' },
+        { text: 'Bussiness', icon: <BusinessIcon />, path: '/Bussiness' },
         { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
     ];
 
@@ -22,7 +22,7 @@ function Sidebar() {
         <Box sx={{
             width: 260,
             flexShrink: 0,
-            bgcolor: 'background.paper',
+            bgcolor: 'background.paper', 
             borderRight: '1px solid',
             borderColor: 'divider',
             height: '100%',
@@ -48,9 +48,9 @@ function Sidebar() {
                                 <ListItemIcon sx={{ color: 'inherit', minWidth: 40 }}>
                                     {item.icon}
                                 </ListItemIcon>
-                                <ListItemText
-                                    primary={item.text}
-                                    primaryTypographyProps={{ fontWeight: isActive ? 'bold' : 'medium' }}
+                                <ListItemText 
+                                    primary={item.text} 
+                                    primaryTypographyProps={{ fontWeight: isActive ? 'bold' : 'medium' }} 
                                 />
                             </ListItemButton>
                         </ListItem>
@@ -59,10 +59,9 @@ function Sidebar() {
             </List>
 
             <Divider sx={{ mb: 2 }} />
-
             <Box sx={{ px: 2, pb: 2 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', p: 1.5, bgcolor: 'action.hover', borderRadius: 2 }}>
-                    <UserAvatar size="medium" />
+                    <UserAvatar size="medium" /> 
                     <Box sx={{ overflow: 'hidden', ml: 1.5 }}>
                         <Typography variant="subtitle2" fontWeight="bold" noWrap>
                             {currentUser?.username || 'User'}

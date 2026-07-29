@@ -23,7 +23,7 @@ function Dashboard() {
     }, [fetchTasks]);
 
     return (
-        <Box sx={{ display: 'flex', height: 'calc(100vh - 65px)', overflow: 'hidden', bgcolor: 'background.default' }}>
+        <Box sx={{ display: 'flex', height: 'calc(100vh - 65px)', overflow: 'hidden' }}>
 
             <Sidebar />
             

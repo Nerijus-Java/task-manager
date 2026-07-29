@@ -12,7 +12,7 @@ import Login from './pages/LoginPage';
 import SettingsPage from './pages/SettingsPage';
 
 import GradientBackground from './components/GradientBackground';
-import { themes } from './theme'; 
+import { themes } from './theme';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -27,6 +27,8 @@ function App() {
   const currentThemeObject = themes[flavor][mode];
   const isDark = mode === 'dark';
 
+  const [backgroundStyle, setBackgroundStyle] = useState('gradient');
+
   return (
     <ThemeProvider theme={currentThemeObject}>
       <SnackbarProvider
@@ -36,15 +38,15 @@ function App() {
         <AuthProvider>
           <BrowserRouter>
             <CssBaseline />
-            <GradientBackground isDark={isDark}>
+            <GradientBackground isDark={isDark} backgroundStyle={backgroundStyle}>
               <NavBar toggleTheme={toggleTheme} isDark={isDark} />
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Registration />} />
                 <Route path="/login" element={<Login />} />
-                <Route 
-                  path="/settings" 
-                  element={<SettingsPage currentFlavor={flavor} onFlavorChange={setFlavor} />} 
+                <Route
+                  path="/settings"
+                  element={<SettingsPage currentFlavor={flavor} onFlavorChange={setFlavor} backgroundStyle={backgroundStyle} onBackgroundStyleChange={setBackgroundStyle} />}
                 />
               </Routes>
             </GradientBackground>

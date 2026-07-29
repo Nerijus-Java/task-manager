@@ -23,7 +23,7 @@ function UserAvatar({ user: propUser, size = 'medium' }) {
     const avatarDimensions = sizeMap[size] || sizeMap.medium;
 
     return (
-        <Tooltip title={`${user?.username || 'User'} (${user?.role || 'Member'})`}>
+        <Tooltip title={`${user?.username || 'User'}`}>
             <Avatar
                 sx={{
                     ...avatarDimensions,
