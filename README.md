@@ -10,14 +10,15 @@ A full-stack web application designed to help users efficiently track, organize,
 *   **Intuitive UI/UX:** A clean, uncluttered navigation bar utilizing streamlined icon placement for quick access to tools.
 *   **Highly Customizable Workspace:** Features 12 unique color themes (including Matrix Code, Cyberpunk Neon, and Amber Gold) and toggleable light/dark modes.
 *   **Modern Aesthetics:** Aesthetic, static diagonal gradient backgrounds that seamlessly blend theme colors for a premium feel without visual distraction.
-*   **Task Metrics & Overview:** Interactive dashboards to visualize to-do, in-progress, and completed tasks at a glance.
+*   **Task Metrics & Overview:** Interactive dashboards with visual charts to track to-do, in-progress, and completed tasks at a glance.
 
 ## 💻 Tech Stack
 
-*   **Frontend:** React.js, Material-UI (MUI), React Router
-*   **Backend:** Java, Spring Boot, Spring Security (JWT), Lombok
+*   **Frontend:** React 19, Material-UI (MUI v9), React Router, Axios, MUI X-Charts
+*   **Backend:** Java 17, Spring Boot 3, Spring Security (JWT), Spring Data JPA, Lombok
+*   **Database:** PostgreSQL
 *   **Tools:** Git, GitHub, Docker & Docker Compose
-
+*   
 ## 📸 Screenshots
 
 ### Landing Page (Dark & Light Mode)
