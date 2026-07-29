@@ -1,16 +1,10 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppBar, Toolbar, Typography, Box, IconButton, Tooltip } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
-import UserAvatar from './UserAvatar';
-import { AuthContext } from '../../context/AuthContext';
-
-function NavBar({ toggleTheme, isDark}) {
-
-  const { isAuthenticated } = useContext(AuthContext);
+function NavBar({ toggleTheme, isDark }) {
 
   return (
     <AppBar position="static"
@@ -36,9 +30,6 @@ function NavBar({ toggleTheme, isDark}) {
             {isDark ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
         </Tooltip>
-
-        {isAuthenticated && <UserAvatar />}
-
       </Toolbar>
     </AppBar>
   );
