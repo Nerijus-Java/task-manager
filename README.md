@@ -18,7 +18,7 @@ A full-stack web application designed to help users efficiently track, organize,
 *   **Backend:** Java 17, Spring Boot 3, Spring Security (JWT), Spring Data JPA, Lombok
 *   **Database:** PostgreSQL
 *   **Tools:** Git, GitHub, Docker & Docker Compose
-*   
+
 ## 📸 Screenshots
 
 ### Landing Page (Dark & Light Mode)
