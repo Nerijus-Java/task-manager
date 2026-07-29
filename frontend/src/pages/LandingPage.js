@@ -2,7 +2,7 @@ import { Box, Button, Typography, Container, Stack, Grid } from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
-import FeatureCard from '../components/landingpage/FeatureCard'
+import FeatureCard from '../components/landingPage/FeatureCard'
 
 import { Link } from 'react-router-dom';
 import { BarChart } from '@mui/icons-material';

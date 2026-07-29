@@ -5,7 +5,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 
 function NavBar({ toggleTheme, isDark }) {
   return (
-    <AppBar 
+    <AppBar
       position="sticky"
       color="default"
       elevation={0}

@@ -1,13 +1,13 @@
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 
-function AnimatedBackground({ children, isDark }) {
+function GradientBackground({ children }) {
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
         minHeight: '100vh',
-        background: isDark
-          ? 'linear-gradient(180deg, #111827 0%, #030712 100%)'
-          : 'linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%)',
+        background: `linear-gradient(180deg, ${theme.palette.background.default} 0%, ${theme.palette.background.paper} 100%)`,
       }}
     >
       <Box sx={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
@@ -17,5 +17,4 @@ function AnimatedBackground({ children, isDark }) {
   );
 }
 
-
-export default AnimatedBackground;
+export default GradientBackground;

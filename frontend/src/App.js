@@ -6,28 +6,33 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { SnackbarProvider } from 'notistack';
 
 import NavBar from './components/navbar/NavBar';
-
 import Registration from './pages/RegistrationPage';
 import Home from './pages/HomePage';
 import Login from './pages/LoginPage';
+import SettingsPage from './pages/SettingsPage';
 
 import GradientBackground from './components/GradientBackground';
-import { darkTheme, lightTheme } from './theme';
+import { themes } from './theme'; 
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
 
-  const [isDark, setIsDark] = useState(false);
+  const [flavor, setFlavor] = useState('default');
+  const [mode, setMode] = useState('dark');
 
-  const toggleTheme = () => setIsDark(!isDark);
+  const toggleTheme = () => {
+    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  };
+
+  const currentThemeObject = themes[flavor][mode];
+  const isDark = mode === 'dark';
 
   return (
-    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+    <ThemeProvider theme={currentThemeObject}>
       <SnackbarProvider
         maxSnack={3}
         autoHideDuration={4000}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        >
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
         <AuthProvider>
           <BrowserRouter>
             <CssBaseline />
@@ -37,6 +42,10 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Registration />} />
                 <Route path="/login" element={<Login />} />
+                <Route 
+                  path="/settings" 
+                  element={<SettingsPage currentFlavor={flavor} onFlavorChange={setFlavor} />} 
+                />
               </Routes>
             </GradientBackground>
           </BrowserRouter>
