@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import { Box, Button, TextField, Typography, Container, Paper } from '@mui/material';
 import { Link } from 'react-router-dom';
-import CustomAlert from '../components/CustomAlert';
 import { useAuth } from '../hooks/useAuth';
 
 function LoginPage() {
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const {executeLogin, alertProps} = useAuth();
+    const {executeLogin} = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -65,7 +64,6 @@ function LoginPage() {
                     </Box>
                 </Paper>
             </Box>
-            <CustomAlert {...alertProps}/>
         </Container>
     );
 }

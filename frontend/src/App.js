@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { SnackbarProvider } from 'notistack';
 
 import NavBar from './components/navbar/NavBar';
 
@@ -22,22 +23,25 @@ function App() {
 
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-      <AuthProvider>
-        <BrowserRouter>
-          <CssBaseline />
-          <GradientBackground isDark={isDark}>
-            <NavBar
-              toggleTheme={toggleTheme}
-              isDark={isDark}
-            />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/register" element={<Registration />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </GradientBackground>
-        </BrowserRouter>
-      </AuthProvider>
+      <SnackbarProvider
+        maxSnack={3}
+        autoHideDuration={4000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        >
+        <AuthProvider>
+          <BrowserRouter>
+            <CssBaseline />
+            <GradientBackground isDark={isDark}>
+              <NavBar toggleTheme={toggleTheme} isDark={isDark} />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/register" element={<Registration />} />
+                <Route path="/login" element={<Login />} />
+              </Routes>
+            </GradientBackground>
+          </BrowserRouter>
+        </AuthProvider>
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }

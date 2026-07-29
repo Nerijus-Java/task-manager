@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Box, Button, TextField, Typography, Container, Paper } from '@mui/material';
 import { Link } from 'react-router-dom';
-import CustomAlert from '../components/CustomAlert';
-import { useAlert } from '../hooks/useAlert';
 import { useAuth } from '../hooks/useAuth';
 
 function RegistrationPage() {
@@ -12,8 +10,7 @@ function RegistrationPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const { alertProps, triggerAlert } = useAlert();
-  const { executeRegistration } = useAuth(triggerAlert);
+  const { executeRegistration } = useAuth();
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -98,7 +95,6 @@ function RegistrationPage() {
           </Box>
         </Paper>
       </Box>
-      <CustomAlert {...alertProps}/>
     </Container>
   );
 }
