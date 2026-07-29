@@ -20,11 +20,16 @@ A full-stack web application designed to help users efficiently track, organize,
 
 ## 📸 Screenshots
 
+### Landing Page (Dark & Light Mode)
+| Dark Mode | Light Mode |
+| :---: | :---: |
+| <img width="100%" alt="Homepage" src="https://github.com/user-attachments/assets/d102ac3a-018b-44b5-9abf-be3adb72111c" /> 
+| <img width="100%" alt="HomepageLight" src="https://github.com/user-attachments/assets/00b3fc8b-9d7e-491c-8f5e-b545c9cbfec3" /> |
+
 ### Dashboard View (Dark & Light Mode)
 | Dark Mode | Light Mode |
 | :---: | :---: |
 | <img width="100%" alt="Dashboard" src="https://github.com/user-attachments/assets/20431528-82ba-4e3a-8f40-6bf5ffed8975" /> | <img width="100%" alt="DashboardLight" src="https://github.com/user-attachments/assets/f2f9aedf-018c-41a4-8a80-f739dd5b3dd8" /> |
-
 
 ### Custom Themes & Backgrounds
 | Dynamic Gradient Glow | Clean Solid Background |
