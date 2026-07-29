@@ -11,7 +11,7 @@ function Sidebar() {
 
     const menuItems = [
         { text: 'Dashboard', icon: <DashboardIcon />, active: true },
-        { text: 'Organizations', icon: <BusinessIcon />, active: false },
+        { text: 'Business', icon: <BusinessIcon />, active: false },
         { text: 'Settings', icon: <SettingsIcon />, active: false },
     ];
 
@@ -19,16 +19,16 @@ function Sidebar() {
         <Box sx={{
             width: 260,
             flexShrink: 0,
-            bgcolor: 'background.paper',
+            bgcolor: 'background.paper', 
             borderRight: '1px solid',
             borderColor: 'divider',
-            height: 'calc(100vh - 65px)',
+            height: 'calc(100vh - 65px)', 
             display: 'flex',
             flexDirection: 'column',
             position: 'sticky',
-            top: 0
+            top: '65px',
+            zIndex: 1100
         }}>
-
             <List sx={{ px: 2, flexGrow: 1 }}>
                 {menuItems.map((item) => (
                     <ListItem key={item.text} disablePadding sx={{ mb: 1 }}>
@@ -45,9 +45,9 @@ function Sidebar() {
                             <ListItemIcon sx={{ color: 'inherit', minWidth: 40 }}>
                                 {item.icon}
                             </ListItemIcon>
-                            <ListItemText
-                                primary={item.text}
-                                primaryTypographyProps={{ fontWeight: item.active ? 'bold' : 'medium' }}
+                            <ListItemText 
+                                primary={item.text} 
+                                primaryTypographyProps={{ fontWeight: item.active ? 'bold' : 'medium' }} 
                             />
                         </ListItemButton>
                     </ListItem>
@@ -56,18 +56,9 @@ function Sidebar() {
 
             <Divider sx={{ mb: 2 }} />
 
-
-            <Box sx={{ px: 2, pb: 3 }}>
-                <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    p: 1.5,
-                    bgcolor: 'action.hover',
-                    borderRadius: 2
-                }}>
-
-                    <UserAvatar />
-
+            <Box sx={{ px: 2, pb: 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', p: 1.5, bgcolor: 'action.hover', borderRadius: 2 }}>
+                    <UserAvatar /> 
                     <Box sx={{ overflow: 'hidden', ml: 1.5 }}>
                         <Typography variant="subtitle2" fontWeight="bold" noWrap>
                             {currentUser?.username || 'User'}

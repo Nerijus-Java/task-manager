@@ -1,20 +1,22 @@
 import { Link } from 'react-router-dom';
-
 import { AppBar, Toolbar, Typography, Box, IconButton, Tooltip } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
 function NavBar({ toggleTheme, isDark }) {
-
   return (
-    <AppBar position="static"
+    <AppBar 
+      position="sticky"
       color="default"
       elevation={0}
       sx={{
+        top: 0,
+        zIndex: 1200,
         borderBottom: 1,
         borderColor: 'divider',
         bgcolor: 'background.paper'
-      }}>
+      }}
+    >
       <Toolbar>
         <Link to="/" style={{ textDecoration: 'none' }}>
           <Typography variant="h5" sx={{ fontWeight: 800, letterSpacing: '-0.5px', transition: 'opacity 0.2s ease', '&:hover': { opacity: 0.7 } }}>
@@ -34,4 +36,5 @@ function NavBar({ toggleTheme, isDark }) {
     </AppBar>
   );
 }
+
 export default NavBar;

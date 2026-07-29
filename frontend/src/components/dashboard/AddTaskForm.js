@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@mui/material';
+import { Button, Drawer, Typography, Box, TextField, IconButton, Divider } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 function AddTaskForm({ open, onClose, onSubmit }) {
     const [title, setTitle] = useState('');
@@ -9,6 +10,7 @@ function AddTaskForm({ open, onClose, onSubmit }) {
         onSubmit({ title, description, status: 'TODO' });
         setTitle('');
         setDescription('');
+        onClose();
     };
 
     const handleClose = () => {
@@ -18,37 +20,61 @@ function AddTaskForm({ open, onClose, onSubmit }) {
     };
 
     return (
-        <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-            <DialogTitle sx={{ fontWeight: 'bold' }}>Create New Task</DialogTitle>
-            <DialogContent>
+        <Drawer 
+            anchor="right" 
+            open={open} 
+            onClose={handleClose}
+            PaperProps={{
+                sx: { width: { xs: '100%', sm: 450 }, p: 4, bgcolor: 'background.paper', backgroundImage: 'none' }
+            }}
+        >
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+                <Typography variant="h5" fontWeight="bold" color="text.primary">
+                    New Task Card
+                </Typography>
+                <IconButton onClick={handleClose} size="small" sx={{ color: 'text.secondary' }}>
+                    <CloseIcon />
+                </IconButton>
+            </Box>
+            
+            <Divider sx={{ mb: 4 }} />
+
+            <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                <Typography variant="caption" color="text.secondary" sx={{ mb: 1, fontWeight: 'bold', letterSpacing: 1 }}>
+                    TASK TITLE
+                </Typography>
                 <TextField
                     autoFocus
-                    margin="dense"
-                    label="Task Title"
+                    placeholder="e.g., Update Database Schema"
                     fullWidth
+                    variant="outlined"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    sx={{ mb: 2, mt: 1 }}
+                    sx={{ mb: 3 }}
                 />
+
+                <Typography variant="caption" color="text.secondary" sx={{ mb: 1, fontWeight: 'bold', letterSpacing: 1 }}>
+                    DESCRIPTION
+                </Typography>
                 <TextField
-                    margin="dense"
-                    label="Description"
+                    placeholder="Add task details here..."
                     fullWidth
                     multiline
-                    rows={4}
+                    rows={6}
+                    variant="outlined"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
-            </DialogContent>
-            <DialogActions sx={{ px: 3, pb: 3 }}>
-                <Button onClick={handleClose} color="inherit" sx={{ fontWeight: 'bold' }}>
+            </Box>
+            <Box sx={{ mt: 'auto', pt: 3, display: 'flex', gap: 2 }}>
+                <Button onClick={handleClose} color="inherit" fullWidth sx={{ fontWeight: 'bold', borderRadius: 2 }}>
                     Cancel
                 </Button>
-                <Button onClick={handleSubmit} variant="contained" sx={{ px: 4, fontWeight: 'bold' }}>
-                    Create Task
+                <Button onClick={handleSubmit} variant="contained" fullWidth sx={{ fontWeight: 'bold', borderRadius: 2 }}>
+                    Save Task
                 </Button>
-            </DialogActions>
-        </Dialog>
+            </Box>
+        </Drawer>
     );
 }
 

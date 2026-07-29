@@ -1,5 +1,4 @@
 import { Container, Box, Grid } from '@mui/material';
-import PageHeader from '../components/PageHeader';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useTasks } from '../hooks/useTasks';
@@ -24,35 +23,32 @@ function Dashboard() {
     }, [fetchTasks]);
 
     return (
-        <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
+        <Box sx={{ display: 'flex', minHeight: 'calc(100vh - 65px)', bgcolor: 'background.default' }}>
 
             <Sidebar />
-            <Box component="main" sx={{ flexGrow: 1, height: '100vh', overflow: 'auto' }}>
 
-                <Container Container maxWidth="xl" sx={{ mt: 6, mb: 8 }}>
+            <Box component="main" sx={{ flexGrow: 1 }}>
 
-                    <Box sx={{ mb: 4 }}>
-                        <PageHeader
-                            title="Dashboard"
-                        />
+                <Container maxWidth="xl" sx={{ mt: 4, mb: 2, display: 'flex', flexDirection: 'column', flexGrow: 1, overflow: 'hidden' }}>
+
+                    <Box sx={{ flexShrink: 0 }}>
+                        <Grid container spacing={4} sx={{ mb: 4 }}>
+                            <Grid size={{ xs: 12, lg: 7 }}>
+                                <TaskMetrics
+                                    todoCount={todoCount}
+                                    inProgressCount={inProgressCount}
+                                    completedCount={completedCount}
+                                />
+                            </Grid>
+                            <Grid size={{ xs: 12, lg: 5 }}>
+                                <TaskOverview
+                                    todoCount={todoCount}
+                                    inProgressCount={inProgressCount}
+                                    completedCount={completedCount}
+                                />
+                            </Grid>
+                        </Grid>
                     </Box>
-
-                    <Grid container spacing={4} sx={{ mb: 4 }}>
-                        <Grid size={{ xs: 12, lg: 7 }}>
-                            <TaskMetrics
-                                todoCount={todoCount}
-                                inProgressCount={inProgressCount}
-                                completedCount={completedCount}
-                            />
-                        </Grid>
-                        <Grid size={{ xs: 12, lg: 5 }}>
-                            <TaskOverview
-                                todoCount={todoCount}
-                                inProgressCount={inProgressCount}
-                                completedCount={completedCount}
-                            />
-                        </Grid>
-                    </Grid>
 
                     <TaskList
                         tasks={tasks}
@@ -61,13 +57,15 @@ function Dashboard() {
                         onAddNew={() => setOpenForm(true)}
                     />
 
-                    <AddTaskForm
-                        open={openForm}
-                        onClose={() => setOpenForm(false)}
-                        onSubmit={handleCreateTask}
-                    />
+
                 </Container>
             </Box>
+
+            <AddTaskForm
+                open={openForm}
+                onClose={() => setOpenForm(false)}
+                onSubmit={handleCreateTask}
+            />
         </Box>
     );
 }
