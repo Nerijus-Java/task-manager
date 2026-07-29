@@ -1,21 +1,47 @@
-import { Box, Typography } from '@mui/material';
-import { BarChart } from '@mui/x-charts/BarChart';
+import { Box, Typography, Card } from '@mui/material';
+import { PieChart } from '@mui/x-charts/PieChart';
 
 function TaskOverview({ todoCount, inProgressCount, completedCount }) {
     return (
-        <Box sx={{ p: 4, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1, width: '100%' }}>
-            <Typography variant="h6" fontWeight="bold" sx={{ mb: 1, color: 'text.secondary' }}>
-                Task Overview
+        <Card elevation={0} sx={{ 
+            p: 3, 
+            height: '100%',
+            bgcolor: 'background.paper', 
+            borderRadius: 3, 
+            border: '1px solid', 
+            borderColor: 'divider',
+            display: 'flex',
+            flexDirection: 'column'
+        }}>
+            <Typography variant="h6" fontWeight="bold" sx={{ color: 'text.primary', mb: 1 }}>
+                Overview
             </Typography>
-            <BarChart
-                xAxis={[{ scaleType: 'band', data: ['To Do', 'In Progress', 'Completed'] }]}
-                series={[{ data: [todoCount, inProgressCount, completedCount], label: 'Current Tasks' }]}
-                height={350}
-                colors={['#1976d2']}
-                margin={{ top: 20, bottom: 30, left: 40, right: 10 }}
-            />
-        </Box>
+            
+            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <PieChart
+                    series={[
+                        {
+                            data: [
+                                { id: 0, value: todoCount, label: 'To Do', color: '#4fc3f7' },
+                                { id: 1, value: inProgressCount, label: 'In Progress', color: '#ffb74d' },
+                                { id: 2, value: completedCount, label: 'Completed', color: '#81c784' },
+                            ],
+                            innerRadius: 50,
+                            outerRadius: 90,
+                            paddingAngle: 3,
+                            cornerRadius: 4,
+                        }
+                    ]}
+                    height={200}
+                    margin={{ right: 120 }}
+                    slotProps={{
+                        legend: {
+                            labelStyle: { fill: '#b0bec5', fontWeight: 'bold' }
+                        }
+                    }}
+                />
+            </Box>
+        </Card>
     );
 }
-
 export default TaskOverview;
