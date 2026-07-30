@@ -41,11 +41,30 @@ public class TaskService {
     public Task assignTask(Long workerId, Task task) {
         User worker = userService.getUserOrThrow(workerId);
         task.setUser(worker);
+        task.setCompany(worker.getCompany());
         return taskRepository.save(task);
     }
 
-    public List<Task> getTaskByUserID(Long userId) {
-        return taskRepository.findByUserId(userId);
+
+    public Task createPersonalTask(String username, Task task) {
+        User currentUser = userService.getUserByUsername(username);
+        task.setUser(currentUser);
+        return taskRepository.save(task);
+    }
+
+    public List<Task> getMyTasks(String username) {
+        User currentUser = userService.getUserByUsername(username);
+        return taskRepository.findByUserId(currentUser.getId());
+    }
+
+    public List<Task> getCompanyTasks(String username) {
+        User currentUser = userService.getUserByUsername(username);
+
+        if (currentUser.getCompany() == null) {
+            return java.util.Collections.emptyList();
+        }
+
+        return taskRepository.findByCompanyId(currentUser.getCompany().getId());
     }
 
     public void deleteTask(long taskId) {

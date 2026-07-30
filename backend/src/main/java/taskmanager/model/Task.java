@@ -9,7 +9,6 @@ import lombok.*;
 @Getter @Setter
 public class Task {
 
-//    Fix user id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,4 +23,8 @@ public class Task {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 }

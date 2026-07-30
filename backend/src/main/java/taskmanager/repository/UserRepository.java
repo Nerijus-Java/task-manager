@@ -1,6 +1,5 @@
 package taskmanager.repository;
 
-import taskmanager.model.Role;
 import taskmanager.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    boolean existsByCompanyCodeAndRole(String companyCode, Role role);
+    List<User> findByCompanyId(Long companyId);
 
     boolean existsUserByUsername(String username);
 
@@ -21,5 +20,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsernameOrEmail(String username, String email);
 
-    List<User> findByCompanyCode(String companyCode);
 }
