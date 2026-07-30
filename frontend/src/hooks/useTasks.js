@@ -1,26 +1,24 @@
 import { useState, useCallback } from 'react';
-import { getTasks, createTask, updateTaskStatus, deleteTask } from '../services/ApiService';
+import { getMyTasks, createPersonalTask, updateTaskStatus, deleteTask } from '../services/ApiService';
 import { useSnackbar } from 'notistack';
 
-export const useTasks = (userId) => {
+export const useTasks = () => {
     const [tasks, setTasks] = useState([]);
-
     const { enqueueSnackbar } = useSnackbar();
 
     const fetchTasks = useCallback(async () => {
-        if (!userId) return;
         try {
-            const response = await getTasks(userId);
+            const response = await getMyTasks();
             setTasks(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
             enqueueSnackbar("Failed to load tasks from server.", { variant: 'error' });
         }
-    }, [userId, enqueueSnackbar]);
+    }, [enqueueSnackbar]);
 
     const handleCreateTask = async (newTask) => {
         try {
-            await createTask(newTask, userId);
-            enqueueSnackbar(`Task ${newTask.title} created successfully!`, { variant: 'success' });
+            await createPersonalTask(newTask);
+            enqueueSnackbar(`Task ${newTask.title || ''} created successfully!`, { variant: 'success' });
             fetchTasks();
         } catch (error) {
             const backendError = error.response?.data?.message || error.response?.data || "Failed to create task.";
@@ -30,7 +28,7 @@ export const useTasks = (userId) => {
 
     const handleToggleStatus = async (taskId, newStatus) => {
         try {
-            await updateTaskStatus(taskId, { status: newStatus });
+            await updateTaskStatus(taskId, newStatus);
             enqueueSnackbar(`Task successfully marked as ${newStatus}!`, { variant: 'success' });
             fetchTasks();
         } catch (error) {
